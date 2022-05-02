@@ -21,3 +21,25 @@ function transform(/* arr */) {
 module.exports = {
   transform
 };
+
+function transform(arr){
+  if (!Array.isArray(arr)) return "'arr' parameter must be an instance of the Array!"
+  let newArr = arr.slice();
+  if(newArr.includes("--discard-next" )){
+    let num = newArr.indexOf("--discard-next");
+    newArr.splice(num, 2)
+  }
+  if(newArr.includes("--discard-prev" )){
+    let num = newArr.indexOf("--discard-prev");
+    newArr.splice(num - 1, 2)
+  }
+  if(newArr.includes("--double-next" )){
+    let num = newArr.indexOf("--double-next");
+    newArr.splice(num, 1, newArr[num + 1])
+  }
+  if(newArr.includes("--double-prev" )){
+    let num = newArr.indexOf("--double-prev");
+    newArr.splice(num - 1, 1,[num + 1])
+  }
+  return newArr; 
+}
